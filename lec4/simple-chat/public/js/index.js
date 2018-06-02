@@ -18,11 +18,13 @@ $(function () {
     socket.on('history', function(msgs) {
         
         msgs.forEach(function(message) {
-            chatboard.append($('<li>').text(message.user + ': ' + message.text));
+            chatboard.append($('<li>').text(message.name + ': ' + message.msg));
         });
-    });
-
+    });  
     
+    socket.on('newmsg', function(msg){
+        chatboard.append($('<li>').text(msg.name + ': ' + msg.msg));
+    })
     
     
     

@@ -14,7 +14,7 @@ const UserModel = require("./models/user.js");
 const MessageModel = require("./models/message");
 
 
-// let user = new UserModel({username: 'John', password: 'password'});
+// let user = new UserModel({username: 'Mike', password: 'password'});
 // user.save();
 
 //conection to database
@@ -48,7 +48,21 @@ app.get('/login', function(req, res) {
 
     res.render('login', {});
 });
-
+app.post('/login/register', function(req,res){
+    let user = new UserModel({
+        username:req.body.username,
+        password:req.body.password
+    });
+    user.save(function(err,result){
+        if(err){console.log('Error while registering');
+        res.status(500);
+        res.send(err.message);
+    } else {
+        console.log('User is created successfully');
+        res.send(result);
+    }
+    });
+})
 app.post('/login/auth', function(req,res) {
 
     UserModel.findOne({username: req.body.username}, (err, response) => {
@@ -85,9 +99,10 @@ io.on('connection', socketioJwt.authorize({
     ioRouter.route(socket);
 });
 
+let port = process.env.PORT || 3000;
 
-http.listen(3000, function(){
-    console.log('listening on *:3000');
+http.listen(port, function(){
+    console.log('listening on *:' + port);
 });
 
 

@@ -7,6 +7,17 @@ class IoRouter {
         // TODO: send message history to client
         // TODO: listen to new messages and process them
 
+        socket.join('chat');
+
+        Message.find(function(err, msgs){
+            if(err) console.log('Error', err);
+            else {
+                socket.emit('history', msgs);
+            } 
+
+        })
+
+
         socket.on('message', (msg, cb) => {
             console.log(msg);
             console.log(socket.user);
@@ -16,10 +27,11 @@ class IoRouter {
                 msg:msg
             });
             
-            message.save(function(err,msg){
+            message.save(function(err,result){
                 if(err)console.log('Error while saving message',err);
-                if(msg)console.log("Success");
+                if(result)console.log("Success");
                 cb();
+                socket.to('chat').emit('newmsg', message);
             });
         })
     }
