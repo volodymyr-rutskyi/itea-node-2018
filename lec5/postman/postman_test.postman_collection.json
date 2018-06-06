@@ -1,0 +1,52 @@
+{
+	"info": {
+		"name": "postman_test",
+		"_postman_id": "6d446b1b-de30-4adb-89d6-c46cd0d3f38f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "11bcef38-1418-49ea-9ae8-16686328c1fe",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test('Name should be \"John\"', function () {",
+							"    //let res = pm.response.to.have.body('{\"name\":\"John\",\"age\":37}');",
+							"    let res = pm.response.json();",
+							"    pm.expect(res.name).to.eql(\"John\");",
+							"})"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3000/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

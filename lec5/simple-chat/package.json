@@ -1,0 +1,23 @@
+{
+  "name": "simple-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha ./tests/**.spec.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "^2.0.4",
+    "socketio-jwt": "^4.5.0",
+    "express": "^4.16.2",
+    "jade": "^1.11.0",
+    "mongoose": "^5.0.4",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "sinon": "^5.1.0",
+    "sinon-mongoose": "^2.1.1"
+  }
+}
